@@ -58,7 +58,6 @@ class Entrega {
         BiPredicate<Integer, Integer> p,
         Predicate<Integer> q,
         Predicate<Integer> r) {
-        
         for(int x:universe){
             for(int y:universe){
                 if((p.test(x,y)) && (!r.test(y) || !q.test(x))){
@@ -66,7 +65,7 @@ class Entrega {
                 }
             }
         }
-    return true;}
+		return true;}
 
     /*
      * És cert que ∃!x. ∀y. Q(y) -> P(x) ?
@@ -79,7 +78,7 @@ class Entrega {
                 }
             }
         }
-      return true;
+		return true;
     }
 
     /*
