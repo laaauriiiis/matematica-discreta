@@ -74,7 +74,7 @@ class Entrega {
     static boolean exercici2(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
         for(int x:universe){
             for(int y:universe){
-                if((!q.test(y) && p.test(x))){
+                if(!q.test(y) && p.test(x)){
                     return false;
                 }
             }
@@ -89,7 +89,30 @@ class Entrega {
      * que cada un d'ells està ordenat de menor a major.
      */
     static boolean exercici3(int[][] universe) {
-      return false; // TO DO
+		int length = 0;
+		int[] maxarr = null;
+		boolean devolver = false;
+		for (int[] x : universe) {
+			if (x.length > length) {
+				length = x.length;
+				maxarr = x;
+			}
+		}
+		for (int[] x : universe) {
+			for (int j = 0; j < x.length; j++) {
+				devolver = false;
+				for (int i = 0; i < length; i++) {
+					if ((maxarr[i] == x[j]) || (x.length == 0)) {
+						devolver = true;
+						break;
+					}
+				}
+				if (devolver == false) {
+					return true;
+				}
+			}
+		}
+		return false;
     }
 
     /*
