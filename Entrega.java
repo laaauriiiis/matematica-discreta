@@ -118,7 +118,16 @@ class Entrega {
      * És cert que ∀x. ∃!y. x·y ≡ 1 (mod n) ?
      */
     static boolean exercici4(int[] universe, int n) {
-      return false; // TO DO
+		int residuo;
+		for(int x:universe){
+			for(int y:universe){
+				residuo=(x * y) % n;
+				if (residuo == 1) {
+					return true;
+				}
+			}
+		}
+		return false;
     }
 
     /*
