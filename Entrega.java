@@ -228,7 +228,22 @@ class Entrega {
      * tant `a` com cada un dels elements de `p` està ordenat de menor a major.
      */
     static boolean exercici1(int[] a, int[][] p) {
-      return false; // TO DO
+        int[]bool=new int [a.length];
+	for(int x=0;x<a.length;x++){
+            for(int []y:p){
+                for(int i=0;i<y.length;i++){
+                    if(a[x]==y[i]){
+                        bool[x]+=1;
+                    }
+                }
+            }
+        }
+        for(int i=0; i<bool.length;i++){
+            if(bool[i]!=1){
+                return false;
+            }
+        }
+      return true; 
     }
 
     /*
