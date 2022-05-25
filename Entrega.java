@@ -421,7 +421,16 @@ class Entrega {
      * Podeu suposar que `a` i `b` són positius.
      */
     static int exercici1(int a, int b) {
-      return -1; // TO DO
+        if (a==0){
+            return b;
+        }
+       int guardar;
+       while (b!=0){
+           guardar=b;
+           b=a%b;
+           a=guardar;
+       }
+      return a;
     }
 
     /*
@@ -430,49 +439,29 @@ class Entrega {
      * Podeu suposar que `a`, `b` i `c` són positius.
      */
     static boolean exercici2(int a, int b, int c) {
-      return false; // TO DO
+        int guardar;
+        while(b!=0){
+            guardar=b;
+            b=a%b;
+            a=guardar;
+        }
+        return a%c==0;
     }
 
     /*
      * Quin es l'invers de `a` mòdul `n`?
      *
      * Retornau l'invers sempre entre 1 i `n-1`, en cas que no existeixi retornau -1
-     */
-    static int exercici3(int a, int n) {
-      return -1; // TO DO
-    }
-
-    /*
-     * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
-     */
-    static void tests() {
-      // Exercici 1
-      // `mcd(a,b)`
-
-      assertThat(
-              exercici1(2, 4) == 2
-      );
-
-      assertThat(
-              exercici1(1236, 984) == 12
-      );
-
-      // Exercici 2
-      // `a``x` + `b``y` = `c` té solució?
-
-      assertThat(
-              exercici2(4,2,2)
-      );
-      assertThat(
-              !exercici2(5,2,2)
-      );
-      // Exercici 3
-      // invers de `a` mòdul `n`
-      assertThat(exercici3(2, 5) == 3);
-      assertThat(exercici3(2, 6) == -1);
-    }
-  }
-
+       */
+      static int exercici3(int a, int n) {
+          for (int i = 0; i < n; i++) {
+              if ((((a % n) * (i % n)) % n) == 1) {
+                  return i;
+              }
+          }
+          return -1;
+      }
+	  
   /*
    * Aquest mètode `main` conté alguns exemples de paràmetres i dels resultats que haurien de donar
    * els exercicis. Podeu utilitzar-los de guia i també en podeu afegir d'altres (no els tendrem en
