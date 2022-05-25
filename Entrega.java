@@ -445,7 +445,7 @@ class Entrega {
             b=a%b;
             a=guardar;
         }
-        return a%c==0;
+        return c%a==0;
     }
 
     /*
