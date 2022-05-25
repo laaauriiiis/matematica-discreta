@@ -280,7 +280,64 @@ class Entrega {
     static final int BIJECTIVE = INJECTIVE + SURJECTIVE;
 
     static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
-      return -1; // TO DO
+		boolean injective;
+		int tipo1 = 1;
+		int[] function = new int[dom.length];
+		if (dom.length < codom.length) {
+			for (int i = 0; i < dom.length; i++) {
+				function[i] = f.apply(dom[i]);
+			}
+			int checkrepeat = 0;
+			for (int i : function) {
+				injective = false;
+				for (int x : codom) {
+					if (i == x) {
+						injective = true;
+						checkrepeat++;
+						break;
+					}
+				}
+				if (injective == false) {
+					tipo1 = 0;
+					break;
+				}
+			}
+			if (tipo1 == 1 && checkrepeat == dom.length) {
+				return INJECTIVE;
+			} else {
+				return NOTHING_SPECIAL;
+			}
+
+		} else if (dom.length > codom.length) {
+			for (int i : dom) {
+				injective = false;
+				for (int x : codom) {
+					if (f.apply(i) == x) {
+						injective = true;
+						break;
+					}
+				}
+				if (injective == false) {
+					tipo1 = 0;
+					break;
+				}
+			}
+			if (tipo1 == 1) {
+				return SURJECTIVE;
+			} else {
+				return NOTHING_SPECIAL;
+			}
+		} else {
+			for (int i = 0; i < dom.length; i++) {
+				function[i] = f.apply(dom[i]);
+			}
+			Arrays.sort(function);
+			if (Arrays.equals(function, codom)) {
+				return BIJECTIVE;
+			} else {
+				return NOTHING_SPECIAL;
+			}
+		}
     }
 
     /*
