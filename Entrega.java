@@ -462,13 +462,70 @@ class Entrega {
           return -1;
       }
 	  
-  /*
-   * Aquest mètode `main` conté alguns exemples de paràmetres i dels resultats que haurien de donar
-   * els exercicis. Podeu utilitzar-los de guia i també en podeu afegir d'altres (no els tendrem en
-   * compte, però és molt recomanable).
-   *
-   * Podeu aprofitar el mètode `assertThat` per comprovar fàcilment que un valor sigui `true`.
-   */
+
+    /*
+     * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
+     */
+    static void tests() {
+      // Exercici 1
+      // `mcd(a,b)`
+
+      assertThat(
+              exercici1(2, 4) == 2
+      );
+
+      assertThat(
+              exercici1(1236, 984) == 12
+      );
+
+      // Exercici 2
+      // `a``x` + `b``y` = `c` té solució?
+
+      assertThat(
+              exercici2(4,2,2)
+      );
+      assertThat(
+              !exercici2(6,2,1)
+      );
+      // Exercici 3
+      // invers de `a` mòdul `n`
+      assertThat(exercici3(2, 5) == 3);
+      assertThat(exercici3(2, 6) == -1);
+    }
+  }
+
+
+    /*
+     * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
+     */
+    static void tests() {
+      // Exercici 1
+      // `mcd(a,b)`
+
+      assertThat(
+              exercici1(2, 4) == 2
+      );
+
+      assertThat(
+              exercici1(1236, 984) == 12
+      );
+
+      // Exercici 2
+      // `a``x` + `b``y` = `c` té solució?
+
+      assertThat(
+              exercici2(4,2,2)
+      );
+      assertThat(
+              !exercici2(6,2,1)
+      );
+      // Exercici 3
+      // invers de `a` mòdul `n`
+      assertThat(exercici3(2, 5) == 3);
+      assertThat(exercici3(2, 6) == -1);
+    }
+  }
+
   public static void main(String[] args) {
     Tema1.tests();
     Tema2.tests();
