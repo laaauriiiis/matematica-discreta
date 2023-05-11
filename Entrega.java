@@ -78,10 +78,11 @@ class Entrega {
      */
     static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
         int contador=0;
-        boolean verificador=true;
+        boolean verificador;
         for(int x: universe){
-            for(int y= 0;verificador&&(y<=universe.length);y++){
-                if(p.test(y)&&(!(q.test(x, y)))){
+            verificador=true;
+            for(int y= 0;verificador&&(y<universe.length);y++){
+                if(p.test(y)&&!(q.test(x, y))){
                     verificador=false;
                 }
             }
