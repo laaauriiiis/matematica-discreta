@@ -62,7 +62,7 @@ class Entrega {
         int contador=0;
         for(int x: universe){
             for(int y: universe){
-                if(p.test(x)&&q.test(x,y)){
+                if(!(p.test(x))||q.test(x,y)){
                     contador++;
                 }
             }
@@ -80,8 +80,8 @@ class Entrega {
         int contador=0;
         boolean verificador=true;
         for(int x: universe){
-            for(int y: verificador && universe){
-                if(!(p.test(y)&&q.test(x, y))){
+            for(int y= 0;verificador&&(y<=universe.length);y++){
+                if(p.test(y)&&(!(q.test(x, y)))){
                     verificador=false;
                 }
             }
