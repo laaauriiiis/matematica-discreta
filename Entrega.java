@@ -1,3 +1,5 @@
+package discretas;
+
 import java.lang.AssertionError;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,7 +8,6 @@ import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.Set;
-
 /*
  * Aquesta entrega consisteix en implementar tots els mètodes annotats amb el comentari "// TO DO".
  *
@@ -30,9 +31,9 @@ import java.util.Set;
  *
  * Podeu fer aquesta entrega en grups de com a màxim 3 persones, i necessitareu com a minim Java 8.
  * Per entregar, posau a continuació els vostres noms i entregau únicament aquest fitxer.
- * - Nom 1:
- * - Nom 2:
- * - Nom 3:
+ * - Nom 1: Laura Rodríguez López
+ * - Nom 2: Antoni Navarro Moreno
+ * - Nom 3: Constantino Pérez Palacios
  *
  * L'entrega es farà a través d'una tasca a l'Aula Digital que obrirem abans de la data que se us
  * hagui comunicat i vos recomanam que treballeu amb un fork d'aquest repositori per seguir més
@@ -58,14 +59,40 @@ class Entrega {
      * És cert que ∀x ∃!y. P(x) -> Q(x,y) ?
      */
     static boolean exercici1(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
-      return false; // TO DO
+        int contador=0;
+        for(int x: universe){
+            for(int y: universe){
+                if(p.test(x)&&q.test(x,y)){
+                    contador++;
+                }
+            }
+            if(contador==1){
+                return true;
+            }
+        }
+        return false;
     }
 
     /*
      * És cert que ∃!x ∀y. P(y) -> Q(x,y) ?
      */
     static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
-      return false; // TO DO
+        int contador=0;
+        boolean verificador=true;
+        for(int x: universe){
+            for(int y: verificador && universe){
+                if(!(p.test(y)&&q.test(x, y))){
+                    verificador=false;
+                }
+            }
+            if(verificador){
+                contador++;
+            }
+        }
+        if(contador==1){
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -353,3 +380,4 @@ class Entrega {
 }
 
 // vim: set textwidth=100 shiftwidth=2 expandtab :
+
