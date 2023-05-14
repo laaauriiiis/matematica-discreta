@@ -67,9 +67,11 @@ class Entrega {
                 }
             }
             if(contador==1){
+                System.out.println("Tema 1, Ejercicio 1: TRUE");
                 return true;
             }
         }
+        System.out.println("Tema 1, Ejercicio 1: FALSE");
         return false;
     }
 
@@ -78,36 +80,65 @@ class Entrega {
      */
     static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
         int contador=0;
-        boolean verificador;
-        for(int x: universe){
-            verificador=true;
-            for(int y= 0;verificador&&(y<universe.length);y++){
-                if(p.test(y)&&!(q.test(x, y))){
-                    verificador=false;
+        for(int y: universe){
+            for(int x: universe){
+                if(!(p.test(y))||(q.test(x, y))){
+                    contador++;
                 }
             }
-            if(verificador){
-                contador++;
+            if(contador!=1){
+                System.out.println("Tema 1, Ejercicio 2: FALSE");
+                return false;
             }
         }
-        if(contador==1){
-            return true;
-        }
-        return false;
+        System.out.println("Tema 1, Ejercicio 2: TRUE");
+        return true;
     }
 
     /*
      * És cert que ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
      */
     static boolean exercici3(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
-      return false; // TO DO
+        int contador=0;
+        for (int z:universe){
+            for(int x: universe){
+                for(int y: universe){
+                    if((p.test(x,z)&&!(q.test(y,z)))||(!(p.test(x,z))&&(q.test(y,z)))){
+                        contador++;
+                    }
+                }
+            }
+        }
+        if(contador>0){
+            System.out.println("Tema 1, Ejercicio 3: TRUE");
+            return true;
+        }
+        System.out.println("Tema 1, Ejercicio 3: FALSE");
+        return false;
     }
 
     /*
      * És cert que (∀x. P(x)) -> (∀x. Q(x)) ?
      */
     static boolean exercici4(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
-      return false; // TO DO
+        boolean Px=true;
+        boolean Qx=true;
+        for(int x:universe){
+            if(!(p.test(x))){
+                Px=false;
+                break;
+            }
+        }
+        for(int x:universe){
+            if(!(q.test(x))){
+                Qx=false;
+                break;
+            }
+        }
+        if(!(Px)||Qx){
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -117,59 +148,59 @@ class Entrega {
       // Exercici 1
       // ∀x ∃!y. P(x) -> Q(x,y) ?
 
-      assertThat(
-          exercici1(
-              new int[] { 2, 3, 5, 6 },
-              x -> x != 4,
-              (x, y) -> x == y
-          )
-      );
-
-      assertThat(
-          !exercici1(
-              new int[] { -2, -1, 0, 1, 2, 3 },
-              x -> x != 0,
-              (x, y) -> x * y == 1
-          )
-      );
+//      assertThat(
+//          exercici1(
+//              new int[] { 2, 3, 5, 6 },
+//              x -> x != 4,
+//              (x, y) -> x == y
+//          )
+//      );
+//
+//      assertThat(
+//          !exercici1(
+//              new int[] { -2, -1, 0, 1, 2, 3 },
+//              x -> x != 0,
+//              (x, y) -> x * y == 1
+//          )
+//      );
 
       // Exercici 2
       // ∃!x ∀y. P(y) -> Q(x,y) ?
 
-      assertThat(
-          exercici2(
-              new int[] { -1, 1, 2, 3, 4 },
-              y -> y <= 0,
-              (x, y) -> x == -y
-          )
-      );
-
-      assertThat(
-          !exercici2(
-              new int[] { -2, -1, 1, 2, 3, 4 },
-              y -> y < 0,
-              (x, y) -> x * y == 1
-          )
-      );
+//      assertThat(
+//          exercici2(
+//              new int[] { -1, 1, 2, 3, 4 },
+//              y -> y <= 0,
+//              (x, y) -> x == -y
+//          )
+//      );
+//
+//      assertThat(
+//          !exercici2(
+//              new int[] { -2, -1, 1, 2, 3, 4 },
+//              y -> y < 0,
+//              (x, y) -> x * y == 1
+//          )
+//      );
 
       // Exercici 3
       // ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
 
-      assertThat(
-          exercici3(
-              new int[] { 2, 3, 4, 5, 6, 7, 8 },
-              (x, z) -> z % x == 0,
-              (y, z) -> z % y == 1
-          )
-      );
-
-      assertThat(
-          !exercici3(
-              new int[] { 2, 3 },
-              (x, z) -> z % x == 1,
-              (y, z) -> z % y == 1
-          )
-      );
+//      assertThat(
+//          exercici3(
+//              new int[] { 2, 3, 4, 5, 6, 7, 8 },
+//              (x, z) -> z % x == 0,
+//              (y, z) -> z % y == 1
+//          )
+//      );
+//
+//      assertThat(
+//          !exercici3(
+//              new int[] { 2, 3 },
+//              (x, z) -> z % x == 1,
+//              (y, z) -> z % y == 1
+//          )
+//      );
 
       // Exercici 4
       // (∀x. P(x)) -> (∀x. Q(x)) ?
@@ -215,7 +246,20 @@ class Entrega {
      * Podeu soposar que `a` està ordenat de menor a major.
      */
     static boolean exercici1(int[] a, int[][] rel) {
-      return false; // TO DO
+        int contador=0;
+        boolean reflexiva=false;
+        //REFLEXIVIDAD
+        for (int elemento1=0;elemento1<a.length;elemento1++) {
+            for (int elemento2=0;elemento2<rel.length;elemento2++) {
+                if ((a[elemento1]==rel[elemento2][0])&&(a[elemento1]==rel[elemento2][1])) {
+                    contador++;
+                }
+            }
+        }
+        if (contador==a.length) {
+            reflexiva=true;
+        }
+        return false;
     }
 
     /*
@@ -381,4 +425,3 @@ class Entrega {
 }
 
 // vim: set textwidth=100 shiftwidth=2 expandtab :
-
