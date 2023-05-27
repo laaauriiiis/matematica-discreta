@@ -387,9 +387,24 @@ class Entrega {
      *
      * Podeu soposar que `a` auxiliar1 `b` estan ordenats de menor a major.
          */
-        static boolean exercici3(int[] a, int[] b, int[][] rel) {
-            return false; // TO DO
+     static boolean exercici3(int[] a, int[] b, int[][] rel) {
+        // Verificar si cada elemento tiene una imagen
+        for (int elemento1 = 0; elemento1 < a.length; elemento1++) {
+            boolean Imagen = false;
+            for (int elemento2 = 0; elemento2 < rel.length; elemento2++) {
+                if ((rel[elemento2][0]==a[elemento1])&&(rel[elemento2][1]==b[elemento1])) {
+                    Imagen = true;
+                    break;
+                }
+            }
+            if (!Imagen) {
+                System.out.println("Tema 2, Ejercicio 3: FALSE");
+                return false;
+            }
         }
+        System.out.println("Tema 2, Ejercicio 3: TRUE");
+        return true;
+    }
 
         /*
      * Suposau que `f` és una funció amb domini `dom` auxiliar1 codomini `codom`.  Retornau:
