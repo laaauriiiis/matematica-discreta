@@ -734,7 +734,60 @@ class Entrega {
      * Si no en té, retornau null.
          */
         static int[] exercici1(int a, int b, int n) {
-            return null; // TO DO
+            //Calculam a mod n i b mod n
+                    int aMod = a % n;
+                    int bMod = b % n;
+                    int aModAux = aMod;
+                    int bModAux = bMod;
+                    int resto = 0;
+                    int[] uQueCompleixEquacio = new int[100000];
+                    int[] solucio = new int[2];
+                    //Feim l'algoritme d'Euclides
+                    while (bMod > 0) {
+                        if (aMod < bMod) {
+                            //Si b és major, s'intercanvïen de lloc per fer correctament
+                            //l'algoritme
+                            int aux;
+                            aux = aMod;
+                            aMod = bMod;
+                            bMod = aMod;
+                        }
+                        resto = aMod % bMod;
+                        aMod = bMod;
+                        bMod = resto;
+                    }
+                    System.out.println(aMod);
+                    //Comprovam que existeixen solucions
+                    if (aMod % b != 0) {
+                        return null;
+                    }
+                    //aMod és ara el mcd(aMod,bMod)
+                    //Comprovam les uQueCompleixEquacio possibles a la equació
+                    //aMod*u + bMod*v = mcd(aMod,bMod)
+                    int i = 0;
+                    for (int u = 0; u < 100000; u++) {
+                        for (int v = 0; v < 100000; v++) {
+                            if ((aModAux * u) + (bModAux * v) == aMod) {
+                                uQueCompleixEquacio[i] = u;
+                                i++;
+                            }
+                        }
+                    }
+
+                    int c = 0;
+                    int uPetita = 0;
+                    //Cercam la u més petita
+                    for (int index = 0; index < uQueCompleixEquacio.length; index++) {
+                        if (uPetita > uQueCompleixEquacio[index]) {
+                            uPetita = uQueCompleixEquacio[index];
+                        }
+                    }
+
+                    //Calculam la soulció a la equació
+                    c = (b * uPetita) / aMod;
+                    solucio[0] = c;
+                    solucio[1] = n;
+                    return solucio;
         }
 
         /*
