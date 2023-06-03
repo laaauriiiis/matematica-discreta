@@ -542,7 +542,26 @@ class Entrega {
      * Retornau l'ordre menys la mida del graf (no dirigit).
      */
     static int exercici1(int[][] g) {
-      return -1; // TO DO
+        int ordre = 0;
+                int mida = 0;
+                int graus = 0;
+                //Contam les files de la matriu, que es corresponen amb els nodes
+                for (int nodes = 0; nodes < g.length; nodes++) {
+                    ordre++;
+                }
+
+                //Contam el grau dels nodes
+                for (int nodes = 0; nodes < g.length; nodes++) {
+                    for (int conexions = 0; conexions < g[nodes].length; conexions++) {
+                        graus++;
+                    }
+                }
+                //Calculam, pel lema de la encaixada de mans, la mida del graf
+                mida = graus / 2;
+
+                //Calculam, finalment, l'ordre menys la mida:
+                System.out.println(ordre - mida);
+                return (ordre - mida);
     }
 
     /*
