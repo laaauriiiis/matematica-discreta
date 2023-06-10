@@ -578,25 +578,36 @@ class Entrega {
         static int contador_hojas_i = 0;
 
         static int exercici3(int[][] g, int i) {
+            boolean[] visitado = new boolean[g.length];
             contador_hojas_i = 0;
+            for (int reinicio = 0; reinicio < g[i].length; reinicio++) {
+                visitado[reinicio] = false;
+            }
+
             for (int hijos = 0; hijos < g[i].length; hijos++) {
-                Recursividad(g[i][hijos], g);
+                visitado[i] = true;
+                Recursividad(g[i][hijos], g, visitado);
             }
             System.out.println(contador_hojas_i);
             return contador_hojas_i;
         }
 
-        static int Recursividad(int nodo, int[][] grafo) {
+        static void Recursividad(int nodo, int[][] grafo, boolean[] visitado) {
+            if (grafo[nodo].length == 0) {
+                visitado[nodo] = true;
+                contador_hojas_i++;
+            }
             for (int nieto = 0; nieto < grafo[nodo].length; nieto++) {
-                if (grafo[grafo[nodo][nieto]].length != 0) {
-                    Recursividad(grafo[nodo][nieto], grafo);
-                } else {
-//                    System.out.println(contador_hojas_i);
-                    contador_hojas_i++;
+                if (visitado[grafo[nodo][nieto]] == false) {
+                    if (grafo[grafo[nodo][nieto]].length == 0) {
+                        visitado[grafo[nodo][nieto]] = true;
+                        contador_hojas_i++;
+                    } else {
+                        visitado[nieto] = true;
+                        Recursividad(grafo[nodo][nieto], grafo, visitado);
+                    }
                 }
             }
-            System.out.println(contador_hojas_i);
-            return contador_hojas_i;
         }
 
     /*
