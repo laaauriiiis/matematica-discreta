@@ -3,12 +3,13 @@ package entrega;
 import java.lang.AssertionError;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
-import java.util.Set;
 
 /*
  * Aquesta entrega consisteix en implementar tots els mètodes annotats amb el comentari "// TO DO".
@@ -64,19 +65,24 @@ class Entrega {
          */
         static boolean exercici1(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
             int contador = 0;
+            //Recorremos el universo de las x
             for (int x : universe) {
                 contador = 0;
+                //Recorremos el universo de las y
                 for (int y : universe) {
+                    //Si se cumple que P(x)->Q(x,y)
                     if (!(p.test(x)) || q.test(x, y)) {
+                        //Aumentamos el contador
                         contador++;
                     }
                 }
+                //Si el contador es diferente de 1
                 if (contador != 1) {
-                    System.out.println("Tema 1, Ejercicio 1: FALSE");
+                    System.out.println("TEMA 1, EJERCICIO 1: FALSE");
                     return false;
                 }
             }
-            System.out.println("Tema 1, Ejercicio 1: TRUE");
+            System.out.println("TEMA 1, EJERCICIO 1: TRUE");
             return true;
         }
 
@@ -103,12 +109,12 @@ class Entrega {
                 }
                 paraTodaY = true;
             }
-            //si el contador es 1, significa que es verdadero porque solo existe una única X para toda Y
+            //Si el contador es 1, significa que es verdadero porque solo existe una única X para toda Y
             if (contador == 1) {
-                System.out.println("Tema 1, Ejercicio 2: TRUE");
+                System.out.println("TEMA 1, EJERCICIO 2: TRUE");
                 return true;
             }
-            System.out.println("Tema 1, Ejercicio 2: FALSE");
+            System.out.println("TEMA 1, EJERCICIO 2: FALSE");
             return false;
         }
 
@@ -117,21 +123,28 @@ class Entrega {
          */
         static boolean exercici3(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
             int contador = 0;
+            //Recorremos el universo de las x
             for (int x : universe) {
+                //Recorremos el universo de las y
                 for (int y : universe) {
                     contador = 0;
+                    //Recorremos el universo de las z
                     for (int z : universe) {
+                        //Si se cumple P(x,z) ⊕ Q(y,z)
                         if ((p.test(x, z) && !q.test(y, z)) || (!p.test(x, z) && q.test(y, z))) {
+                            //Aumentamos el contador
                             contador++;
                         }
                     }
+                    //Si la condicion con la misma x se ha cumplido para todas las z
+                    //la sentencia será verdadera
                     if (contador == universe.length) {
-                        System.out.println("Tema 1, Ejercicio 3: TRUE");
+                        System.out.println("TEMA 1, EJERCICIO 3: TRUE");
                         return true;
                     }
                 }
             }
-            System.out.println("Tema 1, Ejercicio 3: FALSE");
+            System.out.println("TEMA 1, EJERCICIO 3: FALSE");
             return false;
         }
 
@@ -141,19 +154,23 @@ class Entrega {
         static boolean exercici4(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
             boolean Px = true;
             boolean Qx = true;
+            //Recorremos el universo de las x
             for (int x : universe) {
+                //Si no se cumple P(x)
                 if (!(p.test(x))) {
                     Px = false;
                 }
+                //Si no se cumple Q(x)
                 if (!(q.test(x))) {
                     Qx = false;
                 }
             }
+            //Comprobamos que se cumpla (∀x. P(x)) -> (∀x. Q(x))
             if (!(Px) || Qx) {
-                System.out.println("Tema 1, Ejercicio 4: TRUE");
+                System.out.println("TEMA 1, EJERCICIO 4: TRUE");
                 return true;
             }
-            System.out.println("Tema 1, Ejercicio 4: FALSE");
+            System.out.println("TEMA 1, EJERCICIO 4: FALSE");
             return false;
         }
 
@@ -179,8 +196,9 @@ class Entrega {
                             (x, y) -> x * y == 1
                     )
             );
-//             Exercici 2
-//             ∃!x ∀y. P(y) -> Q(x,y) ?
+
+            // Exercici 2
+            // ∃!x ∀y. P(y) -> Q(x,y) ?
             assertThat(
                     exercici2(
                             new int[]{-1, 1, 2, 3, 4},
@@ -196,8 +214,9 @@ class Entrega {
                             (x, y) -> x * y == 1
                     )
             );
-//             Exercici 3
-//             ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
+
+            // Exercici 3
+            // ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
             assertThat(
                     exercici3(
                             new int[]{2, 3, 4, 5, 6, 7, 8},
@@ -213,8 +232,9 @@ class Entrega {
                             (y, z) -> z % y == 1
                     )
             );
-//             Exercici 4
-//             (∀x. P(x)) -> (∀x. Q(x)) ?
+
+            // Exercici 4
+            // (∀x. P(x)) -> (∀x. Q(x)) ?
             assertThat(
                     exercici4(
                             new int[]{0, 1, 2, 3, 4, 5, 8, 9, 16},
@@ -307,14 +327,14 @@ class Entrega {
                     }
                 }
             }
-            
+
             if (reflexiva && simetrica && transitiva) {
-                System.out.println("Tema 2, Ejercicio 1: TRUE");
-                System.out.println("Reflexiva: "+reflexiva+ " Simétrica: " + simetrica + " Transitiva: " + transitiva);
+                System.out.print("TEMA 2, EJERCICIO 1: TRUE, ");
+                System.out.println("REFLEXIVA: " + reflexiva + " SIMÉTRICA: " + simetrica + " TRANSITIVA: " + transitiva);
                 return true;
             }
-            System.out.println("Tema 2, Ejercicio 1: FALSE");
-            System.out.println("Reflexiva: "+reflexiva+ " Simétrica: " + simetrica + " Transitiva: " + transitiva);
+            System.out.print("TEMA 2, EJERCICIO 1: FALSE, ");
+            System.out.println("REFLEXIVA: " + reflexiva + " SIMÉTRICA: " + simetrica + " TRANSITIVA: " + transitiva);
             return false;
         }
 
@@ -402,7 +422,7 @@ class Entrega {
                         }
                     }
                 }
-                System.out.println("TEMA 2, EJERCICIO 2: TRUE, SOLUCIÓN: "+cardinal);
+                System.out.println("TEMA 2, EJERCICIO 2: TRUE, SOLUCIÓN: " + cardinal);
                 return cardinal;
             }
             System.out.println("TEMA 2, EJERCICIO 2: FALSE");
@@ -419,17 +439,21 @@ class Entrega {
             for (int elemento1 = 0; elemento1 < a.length; elemento1++) {
                 boolean Imagen = false;
                 for (int elemento2 = 0; elemento2 < rel.length; elemento2++) {
+                    //
+                    // Si los valores en rel[elemento2][0] y rel[elemento2][1] coinciden con a[elemento1] y b[elemento1] respectivamente, significa que exite una imagen
                     if ((rel[elemento2][0] == a[elemento1]) && (rel[elemento2][1] == b[elemento1])) {
                         Imagen = true;
                         break;
                     }
                 }
+                //Si Imagen es false significa que no es una funcion
                 if (!Imagen) {
-                    System.out.println("Tema 2, Ejercicio 3: FALSE");
+                    System.out.println("TEMA 2, EJERCICIO 3: FALSE");
                     return false;
                 }
             }
-            System.out.println("Tema 2, Ejercicio 3: TRUE");
+            //Acaba el bucle y todos los elementos tienen una imagen por lo tanto es una funcion
+            System.out.println("TEMA 2, EJERCICIO 3: TRUE");
             return true;
         }
 
@@ -444,20 +468,26 @@ class Entrega {
         static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
             int exhaustiva = exhaustiva(dom, codom, f);
             if (exhaustiva != -1) {
+                System.out.println("TEMA 2, EJERCICIO 4: EXHAUSTIVA");
                 return exhaustiva;
             }
             boolean injectiva = injectiva(dom, codom, f);
             if (injectiva) {
+                System.out.println("TEMA 2, EJERCICIO 4: " + (dom.length - codom.length));
                 return dom.length - codom.length;
             }
-            return 0; // TO DO
+            System.out.println("TEMA 2, EJERCICIO 4: 0");
+            return 0;
         }
 
+        //Comprobación exhaustividad
         static int exhaustiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
             int hayAntimagen;
             int maximCardinal = 0;
+            //Miramos todo el codominio
             for (int codomini : codom) {
                 hayAntimagen = 0;
+                //miramos todo el codominio para mirar la antimagen
                 for (int domini : dom) {
                     int imagen = f.apply(dom[domini]);
                     if (imagen == codom[codomini]) {
@@ -468,6 +498,7 @@ class Entrega {
                 if (hayAntimagen == 0) {
                     return -1;
                 }
+                //Si no tiene antimagen no es exhaustiva
                 if (maximCardinal < hayAntimagen) {
                     maximCardinal = hayAntimagen;
                 }
@@ -475,6 +506,7 @@ class Entrega {
             return maximCardinal;
         }
 
+        //Comprobación injectividad
         static boolean injectiva(int[] dom, int[] codom, Function<Integer, Integer> f) {
             int[] hayUnaImagen = new int[codom.length];
             for (int i : hayUnaImagen) {
@@ -514,6 +546,7 @@ class Entrega {
                             new int[][]{{0, 0}, {1, 1}, {2, 2}, {3, 3}, {1, 2}, {1, 3}, {2, 1}, {3, 1}}
                     )
             );
+
             // Exercici 2
             // si `rel` és d'equivalència, quants d'elements té el seu quocient?
             final int[] int09 = {0, 1, 2, 3, 4, 5, 6, 7, 8};
@@ -620,33 +653,60 @@ class Entrega {
      * Retornau l'ordre menys la mida del graf (no dirigit).
          */
         static int exercici1(int[][] g) {
-            int ordre = 0;
-            int mida = 0;
-            int graus = 0;
-            //Contam les files de la matriu, que es corresponen amb els nodes
-            for (int nodes = 0; nodes < g.length; nodes++) {
-                ordre++;
+            int orden = 0;
+            int medida = 0;
+            int grados = 0;
+            //Contamos las filas de la matriz, que se corresponden con los nodos
+            for (int nodos = 0; nodos < g.length; nodos++) {
+                orden++;
             }
 
-            //Contam el grau dels nodes
-            for (int nodes = 0; nodes < g.length; nodes++) {
-                for (int conexions = 0; conexions < g[nodes].length; conexions++) {
-                    graus++;
+            //Contamos el grado de los nodos
+            for (int nodos = 0; nodos < g.length; nodos++) {
+                for (int conexiones = 0; conexiones < g[nodos].length; conexiones++) {
+                    grados++;
                 }
             }
-            //Calculam, pel lema de la encaixada de mans, la mida del graf
-            mida = graus / 2;
+            //Calculamos, por el lema del apretón de manos, las aristas
+            medida = grados / 2;
 
-            //Calculam, finalment, l'ordre menys la mida:
-            System.out.println(ordre - mida);
-            return (ordre - mida);
+            //Calculamos, finalmente, el orden menos la medida:
+            System.out.println("TEMA 3, EJERCICIO 1, SOLUCIÓN: " + (orden - medida));
+            return (orden - medida);
         }
 
         /*
      * Suposau que el graf (no dirigit) és connex. És bipartit?
          */
         static boolean exercici2(int[][] g) {
-            return false; // TO DO
+            ArrayList<Integer> A = new ArrayList<Integer>();
+            ArrayList<Integer> B = new ArrayList<Integer>();
+            for (int nodo = 0; nodo < g.length; nodo++) {
+                if (!B.contains(nodo) || B.isEmpty()) {
+                    A.add(nodo);
+                    //Comprobación de los nodos de A que van a B
+                    for (int elem = 0; elem < g[nodo].length; elem++) {
+                        if (!A.contains(g[nodo][elem]) && !B.contains(g[nodo][elem])) {
+                            B.add(g[nodo][elem]);
+                        } else if (A.contains(g[nodo][elem])) {
+                            System.out.println("TEMA 3, EJERCICIO 2: FALSE");
+                            return false;
+                        }
+                    }
+                } else {
+                    //Comprobación de los nodos de B que van a A
+                    for (int elem = 0; elem < g[nodo].length; elem++) {
+                        if (!A.contains(g[nodo][elem]) && !B.contains(g[nodo][elem])) {
+                            A.add(g[nodo][elem]);
+                        } else if (B.contains(g[nodo][elem])) {
+                            System.out.println("TEMA 3, EJERCICIO 2: FALSE");
+                            return false;
+                        }
+                    }
+                }
+            }
+            System.out.println("TEMA 3, EJERCICIO 2: TRUE");
+            return true;
         }
 
         /*
@@ -658,29 +718,37 @@ class Entrega {
         static int exercici3(int[][] g, int i) {
             boolean[] visitado = new boolean[g.length];
             contador_hojas_i = 0;
+            //Reiniciamos el array de nodos visitados
             for (int reinicio = 0; reinicio < g[i].length; reinicio++) {
                 visitado[reinicio] = false;
             }
-
+            //Recorremos los hijos del nodo elegido
             for (int hijos = 0; hijos < g[i].length; hijos++) {
+                //Marcamos como visitado
                 visitado[i] = true;
+                //Y comprobamos los "nietos" del nodo
                 Recursividad(g[i][hijos], g, visitado);
             }
-            System.out.println(contador_hojas_i);
+            System.out.println("TEMA 3, EJERCICIO 3, SOLUCIÓN: " + contador_hojas_i);
             return contador_hojas_i;
         }
 
         static void Recursividad(int nodo, int[][] grafo, boolean[] visitado) {
+            //Si no tiene hijos, significa que el nodo es una hoja
             if (grafo[nodo].length == 0) {
                 visitado[nodo] = true;
                 contador_hojas_i++;
             }
+            //Comprobamos los hijos del nodo pasado por parámetro
             for (int nieto = 0; nieto < grafo[nodo].length; nieto++) {
+                //Si no se ha visitado
                 if (visitado[grafo[nodo][nieto]] == false) {
+                    //Si no tiene hijos, significa que el nodo es una hoja
                     if (grafo[grafo[nodo][nieto]].length == 0) {
                         visitado[grafo[nodo][nieto]] = true;
                         contador_hojas_i++;
-                    } else {
+                    } //Si no, se vuelven a comprobar sus hijos
+                    else {
                         visitado[nieto] = true;
                         Recursividad(grafo[nodo][nieto], grafo, visitado);
                     }
@@ -693,7 +761,43 @@ class Entrega {
      * Suposau que totes les arestes tenen pes 1.
          */
         static int exercici4(int[][] g) {
-            return -1; // TO DO
+            int valor = 0;
+            int valorAlto = 0;
+            int segundoValorAlto = 0;
+            //Busqueda de las distacncias máximas de ambas salidas de la raíz
+            for (int hijo = 0; hijo < g[0].length; hijo++) {
+
+                valor = preOrden(g, g[0][hijo], 0, 0);
+                if (valorAlto < valor) {
+
+                    segundoValorAlto = valorAlto;
+                    valorAlto = valor;
+
+                } else if (segundoValorAlto < valor) {
+
+                    segundoValorAlto = valor;
+
+                }
+            }
+            System.out.println("TEMA 3, EJERCICIO 4: " + (valorAlto + segundoValorAlto));
+            return (valorAlto + segundoValorAlto);
+        }
+
+        //Busqueda del nodo más lejano
+        static int preOrden(int[][] arbol, int nodo, int valor, int valorMaximo) {
+
+            valor += 1;
+            if (arbol[nodo].length == 0) {
+                return valor;
+            }
+            for (int hijo = 0; hijo < arbol[nodo].length; hijo++) {
+                int aux = preOrden(arbol, arbol[nodo][hijo], valor, valorMaximo);
+                if (valorMaximo < aux) {
+                    valorMaximo = aux;
+                }
+            }
+            return valorMaximo;
+
         }
 
         /*
@@ -783,16 +887,17 @@ class Entrega {
                 {},
                 {},};
 
-//            assertThat(exercici1(undirectedK6) == 6 - 5 * 6 / 2);
-//            assertThat(exercici1(undirectedW4) == 5 - 2 * 4);
-//
-//            assertThat(exercici2(undirectedK23));
-//            assertThat(!exercici2(undirectedK6));
+            assertThat(exercici1(undirectedK6) == 6 - 5 * 6 / 2);
+            assertThat(exercici1(undirectedW4) == 5 - 2 * 4);
+
+            assertThat(exercici2(undirectedK23));
+            assertThat(!exercici2(undirectedK6));
+
             assertThat(exercici3(directedG1, 0) == 3);
             assertThat(exercici3(directedRTree1, 2) == 3);
-//
-//            assertThat(exercici4(directedRTree1) == 5);
-//            assertThat(exercici4(directedRTree2) == 4);
+
+            assertThat(exercici4(directedRTree1) == 5);
+            assertThat(exercici4(directedRTree2) == 4);
         }
     }
 
@@ -869,57 +974,7 @@ class Entrega {
      * Si no en té, retornau null.
          */
         static int[] exercici2a(int[] b, int[] n) {
-            int[] solucion = new int[2];
-
-            // Verificar que los arrays tengan la misma longitud
-            if (b.length != n.length) {
-                return null;
-            }
-
-            // Obtener el producto de todos los valores en n
-            int productoN = 1;
-            for (int i = 0; i < n.length; i++) {
-                productoN = n[i];
-            }
-
-            int[] coeficientes = new int[n.length];
-
-            // Calcular los coeficientes utilizando el algoritmo de Euclides extendido
-            for (int i = 0; i < n.length; i++) {
-                int resto = productoN / n[i];
-                int[] euclides = algoritmoEuclides2(resto, n[i], solucion);
-                coeficientes[i] = (solucion[0] * resto) % productoN;
-            }
-
-            // Calcular la solución x
-            int x = 0;
-            for (int i = 0; i < n.length; i++) {
-                x += (b[i] * coeficientes[i]) % productoN;
-                x %= productoN;
-            }
-            if (x < 0) {
-                x += productoN;
-            }
-
-            return new int[]{x, productoN};
-        }
-
-        static int[] algoritmoEuclides2(int a, int b, int[] solucion) {
-            if (b == 0) {
-                solucion[0] = 1;
-                solucion[1] = 0;
-                return solucion;
-            }
-
-            int[] respuesta = algoritmoEuclides2(b, a % b, solucion);
-
-            int x = respuesta[0];
-            int y = respuesta[1];
-
-            solucion[0] = y;
-            solucion[1] = x - (a / b) * y;
-
-            return solucion;
+            return null;
         }
 
         /*
@@ -959,13 +1014,12 @@ class Entrega {
                 if (n % factor_primo == 0) {
                     descomposicion.add(factor_primo);
                     n /= factor_primo;
-                } 
-                //si el módulo no es 0 significa que no es primo y pasamos al siguiente factor primo
+                } //si el módulo no es 0 significa que no es primo y pasamos al siguiente factor primo
                 else {
                     factor_primo++;
                 }
             } while (n > 1);
-            System.out.println("TEMA 4, EJERCICIO 3A, SOLUCIÓN: " +descomposicion);
+            System.out.println("TEMA 4, EJERCICIO 3A, SOLUCIÓN: " + descomposicion);
             return descomposicion;
         }
 
@@ -978,36 +1032,26 @@ class Entrega {
      * No podeu utilitzar `long` per solucionar aquest problema. Necessitareu l'exercici 3a.
          */
         static int exercici3b(int n) {
-            ArrayList<Integer> descomposicion = exercici3a(n);
+            ArrayList<Integer> descomposicionN = exercici3a(n);
             int fi = 1;
-
-            while (!descomposicion.isEmpty()) {
-                int primos = descomposicion.get(0);
-                int cantidadIguales = 0;
-
-                while (!descomposicion.isEmpty() && descomposicion.get(0) == primos) {
-                    cantidadIguales++;
-                    descomposicion.remove(0);
+            //Recorremos la descomposición
+            while (!descomposicionN.isEmpty()) {
+                int numeroPrimoActual = descomposicionN.get(0);
+                int repeticionPrimo = 0;
+                //Eliminamos el número almacenado en la posicíon del índice actual,
+                //contando cuantas veces se repite el factor primo del índice 
+                //actual de la descomposición
+                while (!descomposicionN.isEmpty() && descomposicionN.get(0) == numeroPrimoActual) {
+                    repeticionPrimo++;
+                    descomposicionN.remove(0);
                 }
-
-                fi *= elevado(primos, cantidadIguales) - elevado(primos, (cantidadIguales - 1));
+                //Calculamos la fi, tal que si p es primo, entonces ϕ(p) = p^n - p^(n-1)
+                fi = (int) (fi * (Math.pow(numeroPrimoActual, repeticionPrimo) - Math.pow(numeroPrimoActual, (repeticionPrimo - 1))));
             }
-
-            fi *= n * n; // Multiplica n por sí mismo para obtener n^3
+            //Calculamos n^3
+            fi = fi * n * n;
 
             return fi;
-        }
-
-// Calcula el número elevado a la potencia "elevado"
-        static int elevado(int numero, int elevado) {
-            int r = 1;
-
-            while (elevado > 0) {
-                r *= numero;
-                elevado--;
-            }
-
-            return r;
         }
 
         /*
@@ -1018,43 +1062,44 @@ class Entrega {
             assertThat(Arrays.equals(exercici1(-2, -4, 6), new int[]{2, 3}));
             assertThat(exercici1(2, 3, 6) == null);
 
-//            assertThat(
-//                    exercici2a(
-//                            new int[]{1, 0},
-//                            new int[]{2, 4}
-//                    )
-//                    == null
-//            );
-//
-//            assertThat(
-//                    Arrays.equals(
-//                            exercici2a(
-//                                    new int[]{3, -1, 2},
-//                                    new int[]{5, 8, 9}
-//                            ),
-//                            new int[]{263, 360}
-//                    )
-//            );
-//
-//            assertThat(
-//                    exercici2b(
-//                            new int[]{1, 1},
-//                            new int[]{1, 0},
-//                            new int[]{2, 4}
-//                    )
-//                    == null
-//            );
-//
-//            assertThat(
-//                    Arrays.equals(
-//                            exercici2b(
-//                                    new int[]{2, -1, 5},
-//                                    new int[]{6, 1, 1},
-//                                    new int[]{10, 8, 9}
-//                            ),
-//                            new int[]{263, 360}
-//                    )
-//            );
+            assertThat(
+                    exercici2a(
+                            new int[]{1, 0},
+                            new int[]{2, 4}
+                    )
+                    == null
+            );
+
+            assertThat(
+                    Arrays.equals(
+                            exercici2a(
+                                    new int[]{3, -1, 2},
+                                    new int[]{5, 8, 9}
+                            ),
+                            new int[]{263, 360}
+                    )
+            );
+
+            assertThat(
+                    exercici2b(
+                            new int[]{1, 1},
+                            new int[]{1, 0},
+                            new int[]{2, 4}
+                    )
+                    == null
+            );
+
+            assertThat(
+                    Arrays.equals(
+                            exercici2b(
+                                    new int[]{2, -1, 5},
+                                    new int[]{6, 1, 1},
+                                    new int[]{10, 8, 9}
+                            ),
+                            new int[]{263, 360}
+                    )
+            );
+
             assertThat(exercici3a(10).equals(List.of(2, 5)));
             assertThat(exercici3a(1291).equals(List.of(1291)));
             assertThat(exercici3a(1292).equals(List.of(2, 2, 17, 19)));
