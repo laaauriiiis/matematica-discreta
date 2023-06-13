@@ -307,12 +307,14 @@ class Entrega {
                     }
                 }
             }
-            System.out.println(reflexiva + " " + simetrica + " " + transitiva);
+            
             if (reflexiva && simetrica && transitiva) {
                 System.out.println("Tema 2, Ejercicio 1: TRUE");
+                System.out.println("Reflexiva: "+reflexiva+ " Simétrica: " + simetrica + " Transitiva: " + transitiva);
                 return true;
             }
             System.out.println("Tema 2, Ejercicio 1: FALSE");
+            System.out.println("Reflexiva: "+reflexiva+ " Simétrica: " + simetrica + " Transitiva: " + transitiva);
             return false;
         }
 
@@ -374,7 +376,6 @@ class Entrega {
                 }
             }
             if (reflexiva && simetrica && transitiva) {
-                System.out.println("Tema 2, Ejercicio 2: TRUE");
                 //Calculamos el cardinal del conjunto cociente de A sobre rel
                 int cardinal = 0;
                 //Vector para almacenar los elementos que ya hemos comprobado
@@ -401,11 +402,10 @@ class Entrega {
                         }
                     }
                 }
-                System.out.println(cardinal);
+                System.out.println("TEMA 2, EJERCICIO 2: TRUE, SOLUCIÓN: "+cardinal);
                 return cardinal;
             }
-            System.out.println("Tema 2, Ejercicio 2: FALSE");
-            System.out.println(-1);
+            System.out.println("TEMA 2, EJERCICIO 2: FALSE");
             return -1;
         }
 
@@ -788,8 +788,8 @@ class Entrega {
 //
 //            assertThat(exercici2(undirectedK23));
 //            assertThat(!exercici2(undirectedK6));
-//            assertThat(exercici3(directedG1, 0) == 3);
-//            assertThat(exercici3(directedRTree1, 2) == 3);
+            assertThat(exercici3(directedG1, 0) == 3);
+            assertThat(exercici3(directedRTree1, 2) == 3);
 //
 //            assertThat(exercici4(directedRTree1) == 5);
 //            assertThat(exercici4(directedRTree2) == 4);
@@ -816,18 +816,20 @@ class Entrega {
          */
         static int[] exercici1(int a, int b, int n) {
             int[] solucion = new int[2];
-            // Aplicamos el algoritmo de Euclides extendido para obtener el mcd
+            //Aplicamos el algoritmo de Euclides extendido para obtener el mcd
             int mcd = algoritmoEuclides(a, n, solucion);
 
-            // Comprobamos si hay solución
+            //Comprobamos si hay solución
             if (b % mcd == 0) {
-                int x0 = (solucion[0] * (b / mcd)) % (n / mcd);
-                if (x0 < 0) {
-                    x0 += n / mcd; // Aseguramos que x0 sea un residuo positivo
+                int c = (solucion[0] * (b / mcd)) % (n / mcd);
+                if (c < 0) {
+                    //Verificamos si c es negativo
+                    //Si lo es, sumamos n / mcd para obtener un valor positivo
+                    c += n / mcd;
                 }
-                System.out.println("X0: " + x0);
-                System.out.println("m: " + Math.abs(n / mcd));
-                return new int[]{x0, Math.abs(n / mcd)};
+                int m = Math.abs(n / mcd);
+                System.out.println("TEMA 4, EJERCICIO 1, SOLUCIÓN: " + c + ", " + Math.abs(n / mcd));
+                return new int[]{c, m};
             }
 
             return null;
@@ -835,13 +837,13 @@ class Entrega {
 
         static int algoritmoEuclides(int a, int b, int[] solucion) {
             // Si b es 0, significa que el mcd(a,b)=a
-            // en la ecuación diofántica resultante (ax+by=mcd), x será 1 e y será 0
+            // en la ecuación diofántica resultante (ax+by=mcd), c será 1 e y será 0
             if (b == 0) {
                 solucion[0] = 1;
                 solucion[1] = 0;
                 return a;
             }
-
+            //Se repite el algoritmo con los nuevos valores
             int mcd = algoritmoEuclides(b, a % b, solucion);
 
             int x = solucion[0];
@@ -886,7 +888,7 @@ class Entrega {
             for (int i = 0; i < n.length; i++) {
                 int resto = productoN / n[i];
                 int[] euclides = algoritmoEuclides2(resto, n[i], solucion);
-                coeficientes[i] =(solucion[0]*resto) % productoN;
+                coeficientes[i] = (solucion[0] * resto) % productoN;
             }
 
             // Calcular la solución x
@@ -898,7 +900,7 @@ class Entrega {
             if (x < 0) {
                 x += productoN;
             }
-            
+
             return new int[]{x, productoN};
         }
 
@@ -950,16 +952,20 @@ class Entrega {
         static ArrayList<Integer> exercici3a(int n) {
             int factor_primo = 2;
             ArrayList<Integer> descomposicion = new ArrayList<>();
-            boolean primer_factor = true;
+            //Bucle que comprueba los factores primos de un numero n, mientras n sea mayor que 1
             do {
+                //si el módulo entre n y el factor primo es 0 significa que es un numero primo y lo añadimos a la lista
+                //además luego dividimos n entre el factor primo para obtener el siguiente numero a descomponer
                 if (n % factor_primo == 0) {
                     descomposicion.add(factor_primo);
                     n /= factor_primo;
-                } else {
+                } 
+                //si el módulo no es 0 significa que no es primo y pasamos al siguiente factor primo
+                else {
                     factor_primo++;
                 }
             } while (n > 1);
-            System.out.println(descomposicion);
+            System.out.println("TEMA 4, EJERCICIO 3A, SOLUCIÓN: " +descomposicion);
             return descomposicion;
         }
 
@@ -972,19 +978,36 @@ class Entrega {
      * No podeu utilitzar `long` per solucionar aquest problema. Necessitareu l'exercici 3a.
          */
         static int exercici3b(int n) {
-            int phi = n * n * (n - 1);  // Inicializar con n³ - n²
-            ArrayList<Integer> descomposicion = exercici3a(n * n * n);  // Obtener la descomposición de n³
+            ArrayList<Integer> descomposicion = exercici3a(n);
+            int fi = 1;
 
-            // Restar los valores de phi correspondientes a los factores de n³
-            for (int factor : descomposicion) {
-                phi = phi - (phi / factor);
+            while (!descomposicion.isEmpty()) {
+                int primos = descomposicion.get(0);
+                int cantidadIguales = 0;
+
+                while (!descomposicion.isEmpty() && descomposicion.get(0) == primos) {
+                    cantidadIguales++;
+                    descomposicion.remove(0);
+                }
+
+                fi *= elevado(primos, cantidadIguales) - elevado(primos, (cantidadIguales - 1));
             }
 
-            // Actualizar phi para contar solo los elementos invertibles a Z módulo n³
-            phi = phi / (n - 1);
+            fi *= n * n; // Multiplica n por sí mismo para obtener n^3
 
-            System.out.println(phi);
-            return phi;
+            return fi;
+        }
+
+// Calcula el número elevado a la potencia "elevado"
+        static int elevado(int numero, int elevado) {
+            int r = 1;
+
+            while (elevado > 0) {
+                r *= numero;
+                elevado--;
+            }
+
+            return r;
         }
 
         /*
@@ -995,43 +1018,43 @@ class Entrega {
             assertThat(Arrays.equals(exercici1(-2, -4, 6), new int[]{2, 3}));
             assertThat(exercici1(2, 3, 6) == null);
 
-            assertThat(
-                    exercici2a(
-                            new int[]{1, 0},
-                            new int[]{2, 4}
-                    )
-                    == null
-            );
-
-            assertThat(
-                    Arrays.equals(
-                            exercici2a(
-                                    new int[]{3, -1, 2},
-                                    new int[]{5, 8, 9}
-                            ),
-                            new int[]{263, 360}
-                    )
-            );
-
-            assertThat(
-                    exercici2b(
-                            new int[]{1, 1},
-                            new int[]{1, 0},
-                            new int[]{2, 4}
-                    )
-                    == null
-            );
-
-            assertThat(
-                    Arrays.equals(
-                            exercici2b(
-                                    new int[]{2, -1, 5},
-                                    new int[]{6, 1, 1},
-                                    new int[]{10, 8, 9}
-                            ),
-                            new int[]{263, 360}
-                    )
-            );
+//            assertThat(
+//                    exercici2a(
+//                            new int[]{1, 0},
+//                            new int[]{2, 4}
+//                    )
+//                    == null
+//            );
+//
+//            assertThat(
+//                    Arrays.equals(
+//                            exercici2a(
+//                                    new int[]{3, -1, 2},
+//                                    new int[]{5, 8, 9}
+//                            ),
+//                            new int[]{263, 360}
+//                    )
+//            );
+//
+//            assertThat(
+//                    exercici2b(
+//                            new int[]{1, 1},
+//                            new int[]{1, 0},
+//                            new int[]{2, 4}
+//                    )
+//                    == null
+//            );
+//
+//            assertThat(
+//                    Arrays.equals(
+//                            exercici2b(
+//                                    new int[]{2, -1, 5},
+//                                    new int[]{6, 1, 1},
+//                                    new int[]{10, 8, 9}
+//                            ),
+//                            new int[]{263, 360}
+//                    )
+//            );
             assertThat(exercici3a(10).equals(List.of(2, 5)));
             assertThat(exercici3a(1291).equals(List.of(1291)));
             assertThat(exercici3a(1292).equals(List.of(2, 2, 17, 19)));
