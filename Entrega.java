@@ -1118,25 +1118,32 @@ class Entrega {
         * No, tampoc podeu utilitzar `double`.
         */
         static int exercici3b(int n) {
-            ArrayList<Integer> descomposicionN = exercici3a(n);
+            ArrayList<Integer> factorizacionN = exercici3a(n);
             int phi = 1;
-            //Recorremos la descomposición
-            while (!descomposicionN.isEmpty()) {
-                int numeroPrimoActual = descomposicionN.get(0);
-                int repeticionPrimo = 0;
-                //Eliminamos el número almacenado en la posición del índice actual,
-                //contando cuantas veces se repite el factor primo del índice 
-                //actual de la descomposición
-                while (!descomposicionN.isEmpty() && descomposicionN.get(0) == numeroPrimoActual) {
-                    repeticionPrimo++;
-                    descomposicionN.remove(0);
+            //Recorremos la factorización del número N
+            while (!factorizacionN.isEmpty()) {
+                int factorPrimo = factorizacionN.get(0);
+                int repeticionFactorPrimo = 0;
+                //Eliminamos el número almacenado en la posición actual,
+                //contando cuantas veces se repite el número en la factorización
+                while (!factorizacionN.isEmpty()) {
+                    if (factorizacionN.get(0) == factorPrimo) {
+                        //Actualizamos el contador
+                        repeticionFactorPrimo++;
+                        //Quitamos el factor contado del array, para poder pasar
+                        //a analizar el siguiente
+                        factorizacionN.remove(0);
+                    } else {
+                        break;
+                    }
                 }
-                //Calculamos la fi, tal que si p es primo, entonces ϕ(p) = p^n - p^(n-1)
-                phi = (int) (phi * (Math.pow(numeroPrimoActual, repeticionPrimo) - Math.pow(numeroPrimoActual, (repeticionPrimo - 1))));
+                //Calculamos la fi, tal que, siendo p un número primo, entonces ϕ(p) = p^n - p^(n-1)
+                phi = (int) (phi * (Math.pow(factorPrimo, repeticionFactorPrimo) - Math.pow(factorPrimo, (repeticionFactorPrimo - 1))));
             }
-            //Calculamos n^3
+            //Calculamos la fi de n^3, siendo la fi de un número elevado equivalente
+            //a la fi de sus factores
             phi = phi * n * n;
-            System.out.println("TEMA 4, EJERCICIO 3B: "+phi);
+            System.out.println("TEMA 4, EJERCICIO 3B: " + phi);
             return phi;
         }
 
