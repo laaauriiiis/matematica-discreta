@@ -1124,7 +1124,7 @@ class Entrega {
             while (!descomposicionN.isEmpty()) {
                 int numeroPrimoActual = descomposicionN.get(0);
                 int repeticionPrimo = 0;
-                //Eliminamos el número almacenado en la posicíon del índice actual,
+                //Eliminamos el número almacenado en la posición del índice actual,
                 //contando cuantas veces se repite el factor primo del índice 
                 //actual de la descomposición
                 while (!descomposicionN.isEmpty() && descomposicionN.get(0) == numeroPrimoActual) {
