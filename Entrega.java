@@ -974,7 +974,83 @@ class Entrega {
      * Si no en té, retornau null.
          */
         static int[] exercici2a(int[] b, int[] n) {
-            return null;
+
+            int mcd;
+            int m;
+            int inversoM;
+            int modulo = 1;
+            int resultado = 0;
+
+            for (int i = 0; i < b.length; i++) {
+                m = 1;
+                modulo *= n[i];
+                for (int j = 0; j < n.length; j++) {
+                    if (i != j) {
+                        m *= n[j];
+                    }
+                }
+                inversoM = m%n[i];
+                //Obtención máximo común divisor
+                mcd = maximoComunDivisor(m, n[i]);
+                if(mcd==1 || inversoM==0){
+                    System.out.println("TEMA 4, EJERCICIO 2A: NULL");
+                    return null;
+                }
+                inversoM = beizut(n[i], inversoM)[i];
+                resultado += m*inversoM*b[i];
+            }
+            //En caso de ser negativo lo pone en positivo
+            if(resultado<0){
+                resultado = (resultado%modulo)+modulo;
+            }
+            int solucion[] = {resultado, modulo};
+            System.out.println("TEMA 4, EJERCICIO 2A: " + solucion);
+            return solucion;
+        }
+
+        static int maximoComunDivisor(int a, int b) {
+            // Para no perder b
+            int temporal;
+            while (b != 0) {
+                temporal = b;
+                b = a % b;
+                a = temporal;
+            }
+            return a;
+        }
+
+        static int[] beizut(int a, int b){
+            int[][] xy = {{1,0}, {0,1}};
+            int[] arrayAux = new int[xy[0].length];
+            int aux;
+            int cociente;
+
+            if(a<b){
+                aux = a;
+                a = b;
+                b = aux;
+                copiar(xy[0], arrayAux);
+                xy[0] = xy[1];
+                copiar(arrayAux, xy[1]);
+            }
+            int[] arrayAux2 = new int[2];
+            while(a%b>0){
+                cociente = a/b;
+                aux = b;
+                b = a%b;
+                a = aux;
+                copiar(xy[1], arrayAux2);
+                xy[1][0] = xy[0][0]-(cociente*xy[1][0]);
+                xy[1][1] = xy[0][1]-(cociente*xy[1][1]);
+            }
+            return xy[1];
+        }
+
+        //Copia de contenido para no indexar
+        static void copiar(int[] original, int[] copia){
+            for(int i=0; i<original.length; i++){
+                copia[i] = original[i];
+            }
         }
 
         /*
@@ -992,7 +1068,17 @@ class Entrega {
      * Si no en té, retornau null.
          */
         static int[] exercici2b(int[] a, int[] b, int[] n) {
-            return null; // TO DO
+            int[] arrayAux;
+            for(int i=0; i<a.length; i++){
+                //LLamada al ejercicio 1 para resolver la congruencia
+                arrayAux = exercici1(a[i], b[i], n[i]);
+                b[i] = arrayAux[0];
+                n[i] = arrayAux[1];
+            }
+            //Llamada al ejercicio 2a para resolver el problema con la estructura anterior;
+            arrayAux = exercici2a(b, n);
+            System.out.println("TEMA 4, EJERCICIO 2B: " + arrayAux);
+            return arrayAux;
         }
 
         /*
