@@ -21,48 +21,48 @@ import java.util.function.Predicate;
  * - Principalment, el correcte funcionament de cada mètode (provant amb diferents entrades). Teniu
  *   alguns exemples al mètode `main`.
  *
- * - Tendrem en compte la neteja auxiliar1 organització del codi. Un estandard que podeu seguir és la guia
+ * - Tendrem en compte la neteja i organització del codi. Un estandard que podeu seguir és la guia
  *   d'estil de Google per Java: https://google.github.io/styleguide/javaguide.html.  Algunes
- *   consideracions importants: indentació auxiliar1 espaiat consistent, bona nomenclatura de variables,
+ *   consideracions importants: indentació i espaiat consistent, bona nomenclatura de variables,
  *   declarar les variables el més aprop possible al primer ús (és a dir, evitau blocs de
  *   declaracions). També convé utilitzar el for-each (for (int x : ...)) enlloc del clàssic (for
- *   (int auxiliar1 = 0; ...)) sempre que no necessiteu l'índex del recorregut.
+ *   (int i = 0; ...)) sempre que no necessiteu l'índex del recorregut.
  *
  * Per com està plantejada aquesta entrega, no necessitau (ni podeu) utilitzar cap `import`
  * addicional, ni mètodes de classes que no estiguin ja importades. El que sí podeu fer és definir
- * tots els mètodes addicionals que volgueu (de manera ordenada auxiliar1 dins el tema que pertoqui).
+ * tots els mètodes addicionals que volgueu (de manera ordenada i dins el tema que pertoqui).
  *
- * Podeu fer aquesta entrega en grups de com a màxim 3 persones, auxiliar1 necessitareu com a minim Java 8.
- * Per entregar, posau a continuació els vostres noms auxiliar1 entregau únicament aquest fitxer.
+ * Podeu fer aquesta entrega en grups de com a màxim 3 persones, i necessitareu com a minim Java 8.
+ * Per entregar, posau a continuació els vostres noms i entregau únicament aquest fitxer.
  * - Nom 1: Laura Rodríguez López
  * - Nom 2: Antoni Navarro Moreno
  * - Nom 3: Constantino Pérez Palacios
  *
  * L'entrega es farà a través d'una tasca a l'Aula Digital que obrirem abans de la data que se us
- * hagui comunicat auxiliar1 vos recomanam que treballeu amb un fork d'aquest repositori per seguir més
+ * hagui comunicat i vos recomanam que treballeu amb un fork d'aquest repositori per seguir més
  * fàcilment les actualitzacions amb enunciats nous. Si no podeu visualitzar bé algun enunciat,
  * assegurau-vos de que el vostre editor de texte estigui configurat amb codificació UTF-8.
  */
 class Entrega {
 
-    /*
+   /*
    * Aquí teniu els exercicis del Tema 1 (Lògica).
    *
-   * Els mètodes reben de paràmetre l'univers (representat com un array) auxiliar1 els predicats adients
+   * Els mètodes reben de paràmetre l'univers (representat com un array) i els predicats adients
    * (per exemple, `Predicate<Integer> p`). Per avaluar aquest predicat, si `x` és un element de
    * l'univers, podeu fer-ho com `p.test(x)`, que té com resultat un booleà (true si `P(x)` és
-   * cert). Els predicats de dues variables són de tipus `BiPredicate<Integer, Integer>` auxiliar1
+   * cert). Els predicats de dues variables són de tipus `BiPredicate<Integer, Integer>` i
    * similarment s'avaluen com `p.test(x, y)`.
    *
-   * En cada un d'aquests exercicis us demanam que donat l'univers auxiliar1 els predicats retorneu `true`
+   * En cada un d'aquests exercicis us demanam que donat l'univers i els predicats retorneu `true`
    * o `false` segons si la proposició donada és certa (suposau que l'univers és suficientment
    * petit com per poder provar tots els casos que faci falta).
-     */
+   */
     static class Tema1 {
 
         /*
-     * És cert que ∀x ∃!y. P(x) -> Q(x,y) ?
-         */
+        * És cert que ∀x ∃!y. P(x) -> Q(x,y) ?
+        */
         static boolean exercici1(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
             int contador = 0;
             //Recorremos el universo de las x
@@ -87,8 +87,8 @@ class Entrega {
         }
 
         /*
-     * És cert que ∃!x ∀y. P(y) -> Q(x,y) ?
-         */
+        * És cert que ∃!x ∀y. P(y) -> Q(x,y) ?
+        */
         static boolean exercici2(int[] universe, Predicate<Integer> p, BiPredicate<Integer, Integer> q) {
 
             boolean paraTodaY = true;
@@ -119,8 +119,8 @@ class Entrega {
         }
 
         /*
-     * És cert que ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
-         */
+        * És cert que ∃x,y ∀z. P(x,z) ⊕ Q(y,z) ?
+        */
         static boolean exercici3(int[] universe, BiPredicate<Integer, Integer> p, BiPredicate<Integer, Integer> q) {
             int contador = 0;
             //Recorremos el universo de las x
@@ -148,9 +148,9 @@ class Entrega {
             return false;
         }
 
-        /*
-     * És cert que (∀x. P(x)) -> (∀x. Q(x)) ?
-         */
+       /*
+        * És cert que (∀x. P(x)) -> (∀x. Q(x)) ?
+        */
         static boolean exercici4(int[] universe, Predicate<Integer> p, Predicate<Integer> q) {
             boolean Px = true;
             boolean Qx = true;
@@ -175,8 +175,8 @@ class Entrega {
         }
 
         /*
-     * Aquí teniu alguns exemples auxiliar1 proves relacionades amb aquests exercicis (vegeu `main`)
-         */
+        * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
+        */
         static void tests() {
             // Exercici 1
             // ∀x ∃!y. P(x) -> Q(x,y) ?
@@ -254,28 +254,28 @@ class Entrega {
     }
 
     /*
-   * Aquí teniu els exercicis del Tema 2 (Conjunts).
-   *
-   * Per senzillesa tractarem els conjunts com arrays (sense elements repetits). Per tant, un
-   * conjunt de conjunts d'enters tendrà tipus int[][].
-   *
-   * Les relacions també les representarem com arrays de dues dimensions, on la segona dimensió
-   * només té dos elements. Per exemple
-   *   int[][] rel = {{0,0}, {1,1}, {0,1}, {2,2}};
-   * auxiliar1 també donarem el conjunt on està definida, per exemple
-   *   int[] a = {0,1,2};
-   *
-   * Les funcions f : A -> B (on A auxiliar1 B son subconjunts dels enters) les representam donant el domini
-   * int[] a, el codomini int[] b, auxiliar1 f un objecte de tipus Function<Integer, Integer> que podeu
-   * avaluar com f.apply(x) (on x és d'a auxiliar1 el resultat f.apply(x) és de b).
-     */
+    * Aquí teniu els exercicis del Tema 2 (Conjunts).
+    *
+    * Per senzillesa tractarem els conjunts com arrays (sense elements repetits). Per tant, un
+    * conjunt de conjunts d'enters tendrà tipus int[][].
+    *
+    * Les relacions també les representarem com arrays de dues dimensions, on la segona dimensió
+    * només té dos elements. Per exemple
+    *   int[][] rel = {{0,0}, {1,1}, {0,1}, {2,2}};
+    * i també donarem el conjunt on està definida, per exemple
+    *   int[] a = {0,1,2};
+    *
+    * Les funcions f : A -> B (on A i B son subconjunts dels enters) les representam donant el domini
+    * int[] a, el codomini int[] b, i f un objecte de tipus Function<Integer, Integer> que podeu
+    * avaluar com f.apply(x) (on x és d'a i el resultat f.apply(x) és de b).
+    */
     static class Tema2 {
 
         /*
-     * Comprovau si la relació `rel` definida sobre `a` és d'equivalència.
-     *
-     * Podeu soposar que `a` està ordenat de menor a major.
-         */
+        * Comprovau si la relació `rel` definida sobre `a` és d'equivalència.
+        *
+        * Podeu soposar que `a` està ordenat de menor a major.
+        */
         static boolean exercici1(int[] a, int[][] rel) {
             int contador = 0;
             boolean reflexiva = false;
@@ -339,11 +339,11 @@ class Entrega {
         }
 
         /*
-     * Comprovau si la relació `rel` definida sobre `a` és d'equivalència. Si ho és, retornau el
-     * cardinal del conjunt quocient de `a` sobre `rel`. Si no, retornau -1.
-     *
-     * Podeu soposar que `a` està ordenat de menor a major.
-         */
+        * Comprovau si la relació `rel` definida sobre `a` és d'equivalència. Si ho és, retornau el
+        * cardinal del conjunt quocient de `a` sobre `rel`. Si no, retornau -1.
+        *
+        * Podeu soposar que `a` està ordenat de menor a major.
+        */
         static int exercici2(int[] a, int[][] rel) {
             int contador = 0;
             boolean reflexiva = false;
@@ -430,10 +430,10 @@ class Entrega {
         }
 
         /*
-     * Comprovau si la relació `rel` definida entre `a` auxiliar1 `b` és una funció.
-     *
-     * Podeu soposar que `a` auxiliar1 `b` estan ordenats de menor a major.
-         */
+        * Comprovau si la relació `rel` definida entre `a` i `b` és una funció.
+        *
+        * Podeu soposar que `a` i `b` estan ordenats de menor a major.
+        */
         static boolean exercici3(int[] a, int[] b, int[][] rel) {
             // Verificar si cada elemento tiene una imagen
             for (int elemento1 = 0; elemento1 < a.length; elemento1++) {
@@ -458,13 +458,13 @@ class Entrega {
         }
 
         /*
-     * Suposau que `f` és una funció amb domini `dom` auxiliar1 codomini `codom`.  Retornau:
-     * - Si és exhaustiva, el màxim cardinal de l'antiimatge de cada element de `codom`.
-     * - Si no, si és injectiva, el cardinal de l'imatge de `f` menys el cardinal de `codom`.
-     * - En qualsevol altre cas, retornau 0.
-     *
-     * Podeu suposar que `dom` auxiliar1 `codom` estàn ordenats de menor a major.
-         */
+        * Suposau que `f` és una funció amb domini `dom` i codomini `codom`.  Retornau:
+        * - Si és exhaustiva, el màxim cardinal de l'antiimatge de cada element de `codom`.
+        * - Si no, si és injectiva, el cardinal de l'imatge de `f` menys el cardinal de `codom`.
+        * - En qualsevol altre cas, retornau 0.
+        *
+        * Podeu suposar que `dom` i `codom` estàn ordenats de menor a major.
+        */
         static int exercici4(int[] dom, int[] codom, Function<Integer, Integer> f) {
             int exhaustiva = exhaustiva(dom, codom, f);
             if (exhaustiva != -1) {
@@ -527,8 +527,8 @@ class Entrega {
         }
 
         /*
-     * Aquí teniu alguns exemples auxiliar1 proves relacionades amb aquests exercicis (vegeu `main`)
-         */
+        * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
+        */
         static void tests() {
             // Exercici 1
             // `rel` és d'equivalencia?
@@ -635,23 +635,23 @@ class Entrega {
         }
     }
 
-    /*
-   * Aquí teniu els exercicis del Tema 3 (Grafs).
-   *
-   * Donarem els grafs en forma de diccionari d'adjacència, és a dir, un graf serà un array
-   * on cada element i-èssim serà un array ordenat que contendrà els índexos dels vèrtexos adjacents
-   * al i-èssim vèrtex. Per exemple, el graf cicle C_3 vendria donat per
-   *
-   *  int[][] g = {{1,2}, {0,2}, {0,1}}  (no dirigit: v0 -> {v1, v2}, v1 -> {v0, v2}, v2 -> {v0,v1})
-   *  int[][] g = {{1}, {2}, {0}}        (dirigit: v0 -> {v1}, v1 -> {v2}, v2 -> {v0})
-   *
-   * Podeu suposar que cap dels grafs té llaços.
-     */
+     /*
+    * Aquí teniu els exercicis del Tema 3 (Grafs).
+    *
+    * Donarem els grafs en forma de diccionari d'adjacència, és a dir, un graf serà un array
+    * on cada element i-èssim serà un array ordenat que contendrà els índexos dels vèrtexos adjacents
+    * al i-èssim vèrtex. Per exemple, el graf cicle C_3 vendria donat per
+    *
+    *  int[][] g = {{1,2}, {0,2}, {0,1}}  (no dirigit: v0 -> {v1, v2}, v1 -> {v0, v2}, v2 -> {v0,v1})
+    *  int[][] g = {{1}, {2}, {0}}        (dirigit: v0 -> {v1}, v1 -> {v2}, v2 -> {v0})
+    *
+    * Podeu suposar que cap dels grafs té llaços.
+    */
     static class Tema3 {
 
         /*
-     * Retornau l'ordre menys la mida del graf (no dirigit).
-         */
+        * Retornau l'ordre menys la mida del graf (no dirigit).
+        */
         static int exercici1(int[][] g) {
             int orden = 0;
             int medida = 0;
@@ -676,8 +676,8 @@ class Entrega {
         }
 
         /*
-     * Suposau que el graf (no dirigit) és connex. És bipartit?
-         */
+        * Suposau que el graf (no dirigit) és connex. És bipartit?
+        */
         static boolean exercici2(int[][] g) {
             ArrayList<Integer> A = new ArrayList<Integer>();
             ArrayList<Integer> B = new ArrayList<Integer>();
@@ -710,9 +710,9 @@ class Entrega {
         }
 
         /*
-     * Suposau que el graf és un DAG. Retornau el nombre de descendents amb grau de sortida 0 del
-     * vèrtex i-èssim.
-         */
+        * Suposau que el graf és un DAG. Retornau el nombre de descendents amb grau de sortida 0 del
+        * vèrtex i-èssim.
+        */
         static int contador_hojas_i = 0;
 
         static int exercici3(int[][] g, int i) {
@@ -757,9 +757,9 @@ class Entrega {
         }
 
         /*
-     * Donat un arbre arrelat (dirigit, suposau que l'arrel es el vèrtex 0), trobau-ne el diàmetre.
-     * Suposau que totes les arestes tenen pes 1.
-         */
+        * Donat un arbre arrelat (dirigit, suposau que l'arrel es el vèrtex 0), trobau-ne el diàmetre
+        * del graf subjacent. Suposau que totes les arestes tenen pes 1.
+        */
         static int exercici4(int[][] g) {
             int valor = 0;
             int valorAlto = 0;
@@ -801,8 +801,8 @@ class Entrega {
         }
 
         /*
-     * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
-         */
+        * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
+        */
         static void tests() {
             final int[][] undirectedK6 = {
                 {1, 2, 3, 4, 5},
@@ -813,10 +813,10 @@ class Entrega {
                 {0, 1, 2, 3, 4},};
 
             /*
-         1
-      4  0  2
-         3
-             */
+               1
+            4  0  2
+               3
+            */
             final int[][] undirectedW4 = {
                 {1, 2, 3, 4},
                 {0, 2, 4},
@@ -833,49 +833,49 @@ class Entrega {
                 {0, 1, 2},};
 
             /*
-             7
-             0
-           1   2
-             3   8
-             4
-           5   6
-             */
+                7
+                0
+              1   2
+                3   8
+                4
+              5   6
+            */
             final int[][] directedG1 = {
-                {1, 2}, // 0
-                {3}, // 1
-                {3, 8}, // 2
-                {4}, // 3
-                {5, 6}, // 4
-                {}, // 5
-                {}, // 6
-                {0}, // 7
+                {1, 2},     // 0
+                {3},        // 1
+                {3, 8},     // 2
+                {4},        // 3
+                {5, 6},     // 4
+                {},         // 5
+                {},         // 6
+                {0},        // 7
                 {},};
 
 
             /*
-              0
-         1    2     3
-            4   5   6
-           7 8
-             */
+                    0
+               1    2     3
+                  4   5   6
+                 7 8
+            */
             final int[][] directedRTree1 = {
-                {1, 2, 3}, // 0 = r
-                {}, // 1
-                {4, 5}, // 2
-                {6}, // 3
-                {7, 8}, // 4
-                {}, // 5
-                {}, // 6
-                {}, // 7
-                {}, // 8
+                {1, 2, 3},  // 0 = r
+                {},         // 1
+                {4, 5},     // 2
+                {6},        // 3
+                {7, 8},     // 4
+                {},         // 5
+                {},         // 6
+                {},         // 7
+                {},         // 8
             };
 
             /*
-            0
-            1
-         2     3
-             4   5
-                6  7
+                0
+                1
+             2     3
+                 4   5
+                    6  7
              */
             final int[][] directedRTree2 = {
                 {1},
@@ -902,23 +902,23 @@ class Entrega {
     }
 
     /*
-   * Aquí teniu els exercicis del Tema 4 (Aritmètica).
-   *
-   * Per calcular residus podeu utilitzar l'operador %, però anau alerta amb els signes.
-   * Podeu suposar que cada vegada que se menciona un mòdul, és major que 1.
-     */
+    * Aquí teniu els exercicis del Tema 4 (Aritmètica).
+    *
+    * Per calcular residus podeu utilitzar l'operador %, però anau alerta amb els signes.
+    * Podeu suposar que cada vegada que se menciona un mòdul, és major que 1.
+    */
     static class Tema4 {
 
         /*
-     * Donau la solució de l'equació
-     *
-     *   ax ≡ b (mod n),
-     *
-     * Els paràmetres `a` i `b` poden ser negatius (`b` pot ser zero), però podeu suposar que n > 1.
-     *
-     * Si la solució és x ≡ c (mod m), retornau `new int[] { c, m }`, amb 0 ⩽ c < m.
-     * Si no en té, retornau null.
-         */
+        * Donau la solució de l'equació
+        *
+        *   ax ≡ b (mod n),
+        *
+        * Els paràmetres `a` i `b` poden ser negatius (`b` pot ser zero), però podeu suposar que n > 1.
+        *
+        * Si la solució és x ≡ c (mod m), retornau `new int[] { c, m }`, amb 0 ⩽ c < m.
+        * Si no en té, retornau null.
+        */
         static int[] exercici1(int a, int b, int n) {
             int[] solucion = new int[2];
             //Aplicamos el algoritmo de Euclides extendido para obtener el mcd
@@ -927,13 +927,13 @@ class Entrega {
             //Comprobamos si hay solución
             if (b % mcd == 0) {
                 int c = (solucion[0] * (b / mcd)) % (n / mcd);
+                int m = Math.abs(n / mcd);
                 if (c < 0) {
                     //Verificamos si c es negativo
                     //Si lo es, sumamos n / mcd para obtener un valor positivo
-                    c += n / mcd;
+                    c = c + m;
                 }
-                int m = Math.abs(n / mcd);
-                System.out.println("TEMA 4, EJERCICIO 1, SOLUCIÓN: " + c + ", " + Math.abs(n / mcd));
+                System.out.println("TEMA 4, EJERCICIO 1, SOLUCIÓN: " + c + ", " + m);
                 return new int[]{c, m};
             }
 
@@ -960,19 +960,19 @@ class Entrega {
         }
 
         /*
-     * Donau la solució (totes) del sistema d'equacions
-     *
-     *  { x ≡ b[0] (mod n[0])
-     *  { x ≡ b[1] (mod n[1])
-     *  { x ≡ b[2] (mod n[2])
-     *  { ...
-     *
-     * Cada b[i] pot ser negatiu o zero, però podeu suposar que n[i] > 1. També podeu suposar
-     * que els dos arrays tenen la mateixa longitud.
-     *
-     * Si la solució és de la forma x ≡ c (mod m), retornau `new int[] { c, m }`, amb 0 ⩽ c < m.
-     * Si no en té, retornau null.
-         */
+        * Donau la solució (totes) del sistema d'equacions
+        *
+        *  { x ≡ b[0] (mod n[0])
+        *  { x ≡ b[1] (mod n[1])
+        *  { x ≡ b[2] (mod n[2])
+        *  { ...
+        *
+        * Cada b[i] pot ser negatiu o zero, però podeu suposar que n[i] > 1. També podeu suposar
+        * que els dos arrays tenen la mateixa longitud.
+        *
+        * Si la solució és de la forma x ≡ c (mod m), retornau `new int[] { c, m }`, amb 0 ⩽ c < m.
+        * Si no en té, retornau null.
+        */
         static int[] exercici2a(int[] b, int[] n) {
 
             int mcd;
@@ -992,11 +992,11 @@ class Entrega {
                 inversoM = m%n[i];
                 //Obtención máximo común divisor
                 mcd = maximoComunDivisor(m, n[i]);
-                if(mcd==1 || inversoM==0){
+                if(mcd==-1 || inversoM==0){
                     System.out.println("TEMA 4, EJERCICIO 2A: NULL");
                     return null;
                 }
-                inversoM = beizut(n[i], inversoM)[i];
+                inversoM = bezout(n[i], inversoM)[1];
                 resultado += m*inversoM*b[i];
             }
             //En caso de ser negativo lo pone en positivo
@@ -1004,22 +1004,22 @@ class Entrega {
                 resultado = (resultado%modulo)+modulo;
             }
             int solucion[] = {resultado, modulo};
-            System.out.println("TEMA 4, EJERCICIO 2A: " + solucion);
+            System.out.println("TEMA 4, EJERCICIO 2A: " + solucion[0] + " " + solucion[1]);
             return solucion;
         }
 
         static int maximoComunDivisor(int a, int b) {
-            // Para no perder b
-            int temporal;
+            //Variable auxiliar
+            int auxiliar;
             while (b != 0) {
-                temporal = b;
+                auxiliar = b;
                 b = a % b;
-                a = temporal;
+                a = auxiliar;
             }
             return a;
         }
 
-        static int[] beizut(int a, int b){
+        static int[] bezout(int a, int b){
             int[][] xy = {{1,0}, {0,1}};
             int[] arrayAux = new int[xy[0].length];
             int aux;
@@ -1033,7 +1033,7 @@ class Entrega {
                 xy[0] = xy[1];
                 copiar(arrayAux, xy[1]);
             }
-            int[] arrayAux2 = new int[2];
+            int[] arrayAux2 = new int[xy[0].length];
             while(a%b>0){
                 cociente = a/b;
                 aux = b;
@@ -1042,6 +1042,7 @@ class Entrega {
                 copiar(xy[1], arrayAux2);
                 xy[1][0] = xy[0][0]-(cociente*xy[1][0]);
                 xy[1][1] = xy[0][1]-(cociente*xy[1][1]);
+                copiar(arrayAux2, xy[0]);
             }
             return xy[1];
         }
@@ -1054,19 +1055,19 @@ class Entrega {
         }
 
         /*
-     * Donau la solució (totes) del sistema d'equacions
-     *
-     *  { a[0]·x ≡ b[0] (mod n[0])
-     *  { a[1]·x ≡ b[1] (mod n[1])
-     *  { a[2]·x ≡ b[2] (mod n[2])
-     *  { ...
-     *
-     * Cada a[i] o b[i] pot ser negatiu (b[i] pot ser zero), però podeu suposar que n[i] > 1. També
-     * podeu suposar que els tres arrays tenen la mateixa longitud.
-     *
-     * Si la solució és de la forma x ≡ c (mod m), retornau `new int[] { c, m }`, amb 0 ⩽ c < m.
-     * Si no en té, retornau null.
-         */
+        * Donau la solució (totes) del sistema d'equacions
+        *
+        *  { a[0]·x ≡ b[0] (mod n[0])
+        *  { a[1]·x ≡ b[1] (mod n[1])
+        *  { a[2]·x ≡ b[2] (mod n[2])
+        *  { ...
+        *
+        * Cada a[i] o b[i] pot ser negatiu (b[i] pot ser zero), però podeu suposar que n[i] > 1. També
+        * podeu suposar que els tres arrays tenen la mateixa longitud.
+        *
+        * Si la solució és de la forma x ≡ c (mod m), retornau `new int[] { c, m }`, amb 0 ⩽ c < m.
+        * Si no en té, retornau null.
+        */
         static int[] exercici2b(int[] a, int[] b, int[] n) {
             int[] arrayAux;
             for(int i=0; i<a.length; i++){
@@ -1082,14 +1083,14 @@ class Entrega {
         }
 
         /*
-     * Suposau que n > 1. Donau-ne la seva descomposició en nombres primers, ordenada de menor a
-     * major, on cada primer apareix tantes vegades com el seu ordre. Per exemple,
-     *
-     * exercici4a(300) --> new int[] { 2, 2, 3, 5, 5 }
-     *
-     * No fa falta que cerqueu algorismes avançats de factorització, podeu utilitzar la força bruta
-     * (el que coneixeu com el mètode manual d'anar provant).
-         */
+        * Suposau que n > 1. Donau-ne la seva descomposició en nombres primers, ordenada de menor a
+        * major, on cada primer apareix tantes vegades com el seu ordre. Per exemple,
+        *
+        * exercici4a(300) --> new int[] { 2, 2, 3, 5, 5 }
+        *
+        * No fa falta que cerqueu algorismes avançats de factorització, podeu utilitzar la força bruta
+        * (el que coneixeu com el mètode manual d'anar provant).
+        */
         static ArrayList<Integer> exercici3a(int n) {
             int factor_primo = 2;
             ArrayList<Integer> descomposicion = new ArrayList<>();
@@ -1110,16 +1111,17 @@ class Entrega {
         }
 
         /*
-     * Retornau el nombre d'elements invertibles a Z mòdul n³.
-     *
-     * Alerta: podeu suposar que el resultat hi cap a un int (32 bits a Java), però n³ no té perquè.
-     * De fet, no doneu per suposat que pogueu tractar res més gran que el resultat.
-     *
-     * No podeu utilitzar `long` per solucionar aquest problema. Necessitareu l'exercici 3a.
-         */
+        * Retornau el nombre d'elements invertibles a Z mòdul n³.
+        *
+        * Alerta: podeu suposar que el resultat hi cap a un int (32 bits a Java), però n³ no té perquè.
+        * De fet, no doneu per suposat que pogueu tractar res més gran que el resultat.
+        *
+        * No podeu utilitzar `long` per solucionar aquest problema. Necessitareu l'exercici 3a.
+        * No, tampoc podeu utilitzar `double`.
+        */
         static int exercici3b(int n) {
             ArrayList<Integer> descomposicionN = exercici3a(n);
-            int fi = 1;
+            int phi = 1;
             //Recorremos la descomposición
             while (!descomposicionN.isEmpty()) {
                 int numeroPrimoActual = descomposicionN.get(0);
@@ -1132,17 +1134,17 @@ class Entrega {
                     descomposicionN.remove(0);
                 }
                 //Calculamos la fi, tal que si p es primo, entonces ϕ(p) = p^n - p^(n-1)
-                fi = (int) (fi * (Math.pow(numeroPrimoActual, repeticionPrimo) - Math.pow(numeroPrimoActual, (repeticionPrimo - 1))));
+                phi = (int) (phi * (Math.pow(numeroPrimoActual, repeticionPrimo) - Math.pow(numeroPrimoActual, (repeticionPrimo - 1))));
             }
             //Calculamos n^3
-            fi = fi * n * n;
-
-            return fi;
+            phi = phi * n * n;
+            System.out.println("TEMA 4, EJERCICIO 3B: "+phi);
+            return phi;
         }
 
         /*
-     * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
-         */
+        * Aquí teniu alguns exemples i proves relacionades amb aquests exercicis (vegeu `main`)
+        */
         static void tests() {
             assertThat(Arrays.equals(exercici1(17, 1, 30), new int[]{23, 30}));
             assertThat(Arrays.equals(exercici1(-2, -4, 6), new int[]{2, 3}));
@@ -1201,12 +1203,12 @@ class Entrega {
     }
 
     /*
-   * Aquest mètode `main` conté alguns exemples de paràmetres auxiliar1 dels resultats que haurien de donar
-   * els exercicis. Podeu utilitzar-los de guia auxiliar1 també en podeu afegir d'altres (no els tendrem en
-   * compte, però és molt recomanable).
-   *
-   * Podeu aprofitar el mètode `assertThat` per comprovar fàcilment que un valor sigui `true`.
-     */
+    * Aquest mètode `main` conté alguns exemples de paràmetres i dels resultats que haurien de donar
+    * els exercicis. Podeu utilitzar-los de guia i també en podeu afegir d'altres (no els tendrem en
+    * compte, però és molt recomanable).
+    *
+    * Podeu aprofitar el mètode `assertThat` per comprovar fàcilment que un valor sigui `true`.
+    */
     public static void main(String[] args) {
         Tema1.tests();
         Tema2.tests();
@@ -1216,9 +1218,8 @@ class Entrega {
 
     /// Si b és cert, no fa res. Si b és fals, llança una excepció (AssertionError).
     static void assertThat(boolean b) {
-        if (!b) {
-            throw new AssertionError();
-        }
+      if (!b)
+        throw new AssertionError();
     }
 }
 
